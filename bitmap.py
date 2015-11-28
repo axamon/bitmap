@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-import os
+import sys
 import socket, struct
 import redis
 
@@ -13,12 +13,14 @@ def inet_aton(ip):
 def inet_ntoa(num):
 	return socket.inet_ntoa(struct.pack('!L', num))
 
-ip="81.45.32.12"
-num = inet_aton(ip)
+def inserisciip(ip):
+	rlocal.setbit("data",inet_aton(ip),1)
 
-rlocal.setbit("data",inet_aton(ip),1)
-
-if rlocal.getbit("data",inet_aton(ip)) == True:
-	print "ok"
-else:
-	print "no"
+def cercaip(ip):
+	if rlocal.getbit("data",inet_aton(ip)) == True:
+	        print "ip presente"
+	else:
+        	print "ip non presente"	
+	
+inserisciip(sys.argv[1])
+cercaip(sys.argv[1])
