@@ -1,4 +1,5 @@
-#!/usr/local/bin/python
+#Funzioni bitmap su db redis
+
 import sys
 import socket, struct
 import redis
@@ -13,14 +14,14 @@ def inet_aton(ip):
 def inet_ntoa(num):
 	return socket.inet_ntoa(struct.pack('!L', num))
 
-def inserisciip(ip):
-	rlocal.setbit("data",inet_aton(ip),1)
+def inserisciip(ip,key):
+	rlocal.setbit(key,inet_aton(ip),1)
 
 def cercaip(ip):
 	if rlocal.getbit("data",inet_aton(ip)) == True:
 	        print "ip presente"
 	else:
         	print "ip non presente"	
-	
-inserisciip(sys.argv[1])
-cercaip(sys.argv[1])
+
+def contaip(ip):
+	return rlocal.bitcount("data")
