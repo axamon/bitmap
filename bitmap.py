@@ -28,3 +28,17 @@ def cercaip(ip):
 
 def contaip(ip):
 	return rlocal.bitcount("data")
+
+def ingestainredis():
+        "ingesta in redis le statistiche"
+        filelog = rlocal.brpop("ticlogdaingestare",0)[1]
+        fieldnames = ("timestamp", "epoch", "altronumero", "cachedelivery", "simmetrico", "domain", "ip1", "porta1", "ip2", "porta2", "tot", "vuoto", "url", "status", "mistero", "bytes1", "bytes2", "numero1", "numero2")
+        try:
+            with gzip.open(filelog, 'rb') as csvfile:
+                    reader = csv.DictReader( csvfile,fieldnames,delimiter="\t")
+                    for row in reader:
+                        # print row['epoch']
+                        print datetime.datetime.fromtimestamp(float(row['epoch'])/1000).strftime('%Y%m%d:%H:%M')
+            #os.remove(filelog)
+        except OSError:
+                pass
