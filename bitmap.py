@@ -1,5 +1,6 @@
 #Funzioni bitmap su db redis
 
+import os
 import sys
 import socket, struct
 import redis
