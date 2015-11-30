@@ -6,6 +6,9 @@ import redis
 
 rlocal=redis.StrictRedis()
 
+def version():
+	print "Versione 1, autore: Alberto Bregliano"
+
 
 def inet_aton(ip):
 	packedIP = socket.inet_aton(ip)
